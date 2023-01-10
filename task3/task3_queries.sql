@@ -44,7 +44,7 @@ FROM
 FROM lesson WHERE DATE_PART('week', start_time) = DATE_PART('week', CURRENT_DATE) + 1
 AND EXTRACT(YEAR FROM start_time) = EXTRACT(YEAR FROM CURRENT_DATE)
 AND lesson_type='ensemble') b
-INNER JOIN lesson_student ON b.id = lesson_student.lesson_id
+LEFT JOIN lesson_student ON b.id = lesson_student.lesson_id
 ) a
 GROUP BY start_time, genre, maximum_students
 ORDER BY genre, DATE_PART('day', start_time)

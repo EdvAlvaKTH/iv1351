@@ -41,10 +41,14 @@ CASE
 END as remaining_spots
 FROM
 ((SELECT *
+-- CHANGE THE TWO LINES BELOW TO THE TWO COMMENTED LINES BELOW TO GET SEEDED DATA AS OUTPUT AT A LATER TIME
 FROM lesson WHERE DATE_PART('week', start_time) = DATE_PART('week', CURRENT_DATE) + 1
 AND EXTRACT(YEAR FROM start_time) = EXTRACT(YEAR FROM CURRENT_DATE)
+--FROM lesson WHERE DATE_PART('week', start_time) = 2
+--AND EXTRACT(YEAR FROM start_time) = '2023'
 AND lesson_type='ensemble') b
 LEFT JOIN lesson_student ON b.id = lesson_student.lesson_id
 ) a
 GROUP BY start_time, genre, maximum_students
 ORDER BY genre, DATE_PART('day', start_time)
+
